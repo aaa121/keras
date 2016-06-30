@@ -928,7 +928,7 @@ class LSTMBN(Recurrent):
             self.uses_learning_phase = True
         if self.dropout_W or self.dropout_U:
             self.uses_learning_phase = True
-        super(LSTM, self).__init__(**kwargs)
+        super(LSTMBN, self).__init__(**kwargs)
 
     def build(self, input_shape):
         self.input_spec = [InputSpec(shape=input_shape)]
@@ -1072,7 +1072,7 @@ class LSTMBN(Recurrent):
 
     def get_initial_states(self, x):
         if not self.batch_norm:
-            return super(LSTM,self).get_initial_states(x)
+            return super(LSTMBN,self).get_initial_states(x)
 
         # build an all-zero tensor of shape (samples, output_dim)
         initial_state = K.zeros_like(x)  # (samples, timesteps, input_dim)
@@ -1254,5 +1254,5 @@ class LSTMBN(Recurrent):
                   "dropout_U": self.dropout_U}
         if self.batch_norm:
             config["momentum"] = self.momentum
-        base_config = super(LSTM, self).get_config()
+        base_config = super(LSTMBN, self).get_config()
         return dict(list(base_config.items()) + list(config.items()))

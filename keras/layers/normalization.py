@@ -112,16 +112,16 @@ class BatchNormalization(Layer):
                 out = K.reshape(self.gamma, broadcast_shape) * x_normed + K.reshape(self.beta, broadcast_shape)
             else:
                 # mode 0
-                if self.called_with not in {None, x}:
-                    raise Exception('You are attempting to share a '
-                                    'same `BatchNormalization` layer across '
-                                    'different data flows. '
-                                    'This is not possible. '
-                                    'You should use `mode=2` in '
-                                    '`BatchNormalization`, which has '
-                                    'a similar behavior but is shareable '
-                                    '(see docs for a description of '
-                                    'the behavior).')
+                # if self.called_with not in {None, x}:
+                #     raise Exception('You are attempting to share a '
+                #                     'same `BatchNormalization` layer across '
+                #                     'different data flows. '
+                #                     'This is not possible. '
+                #                     'You should use `mode=2` in '
+                #                     '`BatchNormalization`, which has '
+                #                     'a similar behavior but is shareable '
+                #                     '(see docs for a description of '
+                #                     'the behavior).')
                 self.called_with = x
                 self.updates = [(self.running_mean, mean_update),
                                 (self.running_std, std_update)]
